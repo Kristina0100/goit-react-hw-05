@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, useNavigate, useLocation, Link, Outlet } from "react-router-dom";
+import {Suspense } from "react";
 import { getMovieById } from "../api/movies";
 
-// import MovieCast from './components/MovieCast/MovieCast'
-// import MovieReviews from "./components/MovieReviews/MovieReviews";
-
-const MovieDetailsPage = () => {
+export default function MovieDetailsPage() {
   // loading, error
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const backURL = location.state?.from || '/movies';
+  const goBack = () => navigate(backURL);
 
   useEffect(() => {
     const fetchMovieById = async () => {
@@ -28,6 +31,7 @@ const MovieDetailsPage = () => {
       {error && <p>Error: {error}</p>}
       {movie && (
         <div>
+          
           <div>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="Movie poster" />
             <h1>{movie.title}</h1>
@@ -38,18 +42,23 @@ const MovieDetailsPage = () => {
             <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
           </div>
           <div>
+
             <p>Additional information</p>
             <ul>
-              <li> <NavLink to={`/movie/${movieId}/credits`}>Cast</NavLink>
-          </li>
-              <li><NavLink to={`/movie/${movieId}/reviews`}>Reviews</NavLink>
+              <li>
+                <Link to="credits">Cast</Link>
+              </li>
+              <li>
+                <Link to="reviews">Reviews</Link>
               </li>
             </ul>
+             <Suspense fallback={<div>Loading subpage...</div>}>
+              <Outlet />
+             </Suspense>
+            <button type="button" onClick={goBack}>Go back</button>
           </div>
         </div>
       )}
     </div>
   );
-}
-
-export default MovieDetailsPage;
+};

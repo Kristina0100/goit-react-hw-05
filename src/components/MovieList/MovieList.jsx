@@ -1,12 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+import styles from "./MovieList.module.css"
 
 const MovieList = ({ movies }) => {
+     const location = useLocation();
   return (
     <div>
-      <ul>
+      {/* {location.pathname.includes('trending') {
+      
+      }} */}
+      <ul className={styles.list}>
         {movies && movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+          <li key={movie.id} className={styles.title}>
+            <Link state={{ from: location }} to={`/movies/${movie.id}`}>{movie.title}</Link>
           </li>
         ))}
       </ul>

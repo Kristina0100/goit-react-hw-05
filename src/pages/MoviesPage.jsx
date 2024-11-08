@@ -1,13 +1,12 @@
-import {  useSearchParams } from "react-router-dom";
+import {  useSearchParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import { searchMovie } from "../api/movies";
 
 import MovieDetailsPage from "./MovieDetailsPage";
 import MovieList from "../components/MovieList/MovieList";
 
-const MoviesPage = () => {
-  // const {movieId} = useParams();
-  const [movies, setMovies] = useState(null); 
+export default function MoviesPage() {
+  const [movies, setMovies] = useState(null);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +14,7 @@ const MoviesPage = () => {
   const searchValue = searchParams.get("query");
 
   const onSearch = (searchTerm) => {
-    setSearchParams({query: searchTerm});
+    setSearchParams({ query: searchTerm });
   };
   
   useEffect(() => {
@@ -27,15 +26,15 @@ const MoviesPage = () => {
       } catch (error) {
         setError(error.message);
       };
-      };
-        fetchMoviesBySearchValue();
+    };
+    fetchMoviesBySearchValue();
   }, [searchValue]);
   
-    const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-    const handleSearch = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     onSearch(searchTerm);
   };
@@ -43,20 +42,19 @@ const MoviesPage = () => {
   return (
     <div>
       <form onSubmit={handleSearch} >
-        <input type="text"   
+        <input type="text"
           name="searchTerm"
           placeholder="Search movie"
           value={searchTerm}
-          onChange={handleInputChange}/>
+          onChange={handleInputChange} />
         <button type="submit">Search</button>
       </form>
       
       {error && <p>Error: {error}</p>}
       
       {movies && <MovieList movies={movies} />}
-      <MovieDetailsPage/>
+      <MovieDetailsPage />
     </div>
-  )
-}
-
-export default MoviesPage
+  );
+};
+  

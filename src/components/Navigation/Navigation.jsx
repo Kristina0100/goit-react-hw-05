@@ -6,9 +6,9 @@ import styles from "./Navigation.module.css"
 const buildCssClasses = ({ isActive }) =>
   clsx(styles.link, isActive && styles.active);
 
-const Navigation = () => {
+export default function Navigation() {
   return (
-    <header>
+    <header className={styles.header}>
       <NavLink className={buildCssClasses} to="/">
         Home
       </NavLink>
@@ -18,5 +18,3 @@ const Navigation = () => {
     </header>
   )
 }
-
-export default Navigation

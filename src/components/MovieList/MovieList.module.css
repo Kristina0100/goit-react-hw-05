@@ -1,0 +1,12 @@
+.list {
+  margin-left: 35px;
+  list-style-type: circle;
+}
+
+.title {
+  margin-bottom: 4px;
+}
+
+.title:hover {
+  color: #0171c2;
+}

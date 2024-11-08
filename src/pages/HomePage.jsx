@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getTrendingMovies } from "../api/movies";
 import MovieList from "../components/MovieList/MovieList";
 
-const HomePage = () => {
+export default function HomePage() {
 
 const [movies, setMovies] = useState(null); 
 const [error, setError] = useState(null);
@@ -21,11 +21,14 @@ const [error, setError] = useState(null);
   
   return (
     <div>
-      <h1>Trending today</h1>
+      <h1 style={{
+        color: "#0D253F", 
+        marginBottom: '20px',
+        marginLeft: '15px',
+       }}> Trending today </h1>
        {error && <p>Error: {error}</p>}
       <MovieList movies={movies} />
     </div>
   )
 }
 
-export default HomePage
