@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { getTrendingMovies } from "../api/movies";
-import MovieList from "../components/MovieList/MovieList";
+import { getTrendingMovies } from "../../api/movies";
+import MovieList from "../../components/MovieList/MovieList";
+
+import styles from "./HomePage.module.css";
 
 export default function HomePage() {
 
@@ -21,11 +23,7 @@ const [error, setError] = useState(null);
   
   return (
     <div>
-      <h1 style={{
-        color: "#0D253F", 
-        marginBottom: '20px',
-        marginLeft: '15px',
-       }}> Trending today </h1>
+      <h1 className={styles.title}> Trending today </h1>
        {error && <p>Error: {error}</p>}
       <MovieList movies={movies} />
     </div>

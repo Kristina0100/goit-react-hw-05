@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieCast } from "../../api/movies";
 
+import styles from "./MovieCast.module.css"
+import actorDefault from '../../images/actorDefault.png';
+
 export default function MovieCast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
@@ -22,16 +25,21 @@ export default function MovieCast() {
   return (
     <div>
       {error && <p>Error: {error}</p>}
-      <h3>Cast</h3>
-      <ul>
+      <div className={styles.cast}>
+      <ul className={styles.list}>
         {cast.map((actor) => (
           <li key={actor.id}>
-             <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt="Actor photo" />
-            <p>{actor.name}</p>
-            <p>Character: {actor.character}</p>
+            <img
+              src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : actorDefault}
+              // src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+              className={`${styles.photo} ${styles.default}`}
+              alt="Actor photo" />
+            <p className={styles.name}>{actor.name}</p>
+            <p>Character: {actor.character ? actor.character : '???'}</p>
           </li>
         ))}
-      </ul>
+        </ul>
+      </div>
     </div>
   );
 };

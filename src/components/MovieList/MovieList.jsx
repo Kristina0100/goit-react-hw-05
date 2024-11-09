@@ -6,9 +6,6 @@ const MovieList = ({ movies }) => {
      const location = useLocation();
   return (
     <div>
-      {/* {location.pathname.includes('trending') {
-      
-      }} */}
       <ul className={styles.list}>
         {movies && movies.map((movie) => (
           <li key={movie.id} className={styles.title}>

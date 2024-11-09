@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation, Link, Outlet } from "react-router-dom";
 import {Suspense } from "react";
-import { getMovieById } from "../api/movies";
+import { getMovieById } from "../../api/movies";
+
+import styles from "./MovieDetailsPage.module.css"
 
 export default function MovieDetailsPage() {
   // loading, error
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,32 +33,35 @@ export default function MovieDetailsPage() {
     <div>
       {error && <p>Error: {error}</p>}
       {movie && (
-        <div>
+        <div className={styles.page}>
           
-          <div>
+          <div className={styles.imgwrap}>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="Movie poster" />
-            <h1>{movie.title}</h1>
+            <div className={styles.wrap}>
+              <h1 className={styles.title}>{movie.title}</h1>
             <p>User score: {movie.vote_average * 10}%</p>
-          <h2>Overview</h2>
+          <h2 className={styles.heading}>Overview</h2>
           <p>{movie.overview}</p>
-          <h3>Genres</h3>
-            <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
+          <h3 className={styles.heading}>Genres</h3>
+              <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
+            </div>
           </div>
           <div>
-
-            <p>Additional information</p>
-            <ul>
-              <li>
-                <Link to="credits">Cast</Link>
-              </li>
-              <li>
-                <Link to="reviews">Reviews</Link>
-              </li>
-            </ul>
+            <div className={styles.additional}>
+              <p className={styles.add_title}>Additional information</p>
+                <ul className={styles.list}>
+                  <li className={styles.item}>
+                    <Link to="credits" state={{ from: location.state?.from }}>Cast</Link>
+                  </li>
+                  <li className={styles.item}>
+                    <Link to="reviews" state={{ from: location.state?.from }}>Reviews</Link>
+                  </li>
+                </ul>
              <Suspense fallback={<div>Loading subpage...</div>}>
               <Outlet />
              </Suspense>
-            <button type="button" onClick={goBack}>Go back</button>
+            </div>
+           <button type="button" onClick={goBack} className={styles.btn}>Go back</button>
           </div>
         </div>
       )}

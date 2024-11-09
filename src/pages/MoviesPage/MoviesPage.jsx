@@ -1,9 +1,11 @@
-import {  useSearchParams} from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import { useEffect, useState } from "react";
-import { searchMovie } from "../api/movies";
+import { searchMovie } from "../../api/movies";
 
-import MovieDetailsPage from "./MovieDetailsPage";
-import MovieList from "../components/MovieList/MovieList";
+import MovieDetailsPage from '../MovieDetailsPage/MovieDetailsPage';
+import MovieList from "../../components/MovieList/MovieList";
+
+import styles from "./MoviesPage.module.css"
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState(null);
@@ -41,13 +43,14 @@ export default function MoviesPage() {
   
   return (
     <div>
-      <form onSubmit={handleSearch} >
+      <form onSubmit={handleSearch} className={styles.form} >
         <input type="text"
           name="searchTerm"
           placeholder="Search movie"
           value={searchTerm}
-          onChange={handleInputChange} />
-        <button type="submit">Search</button>
+          onChange={handleInputChange}
+          className={styles.input} />
+        <button className={styles.btn} type="submit">Search</button>
       </form>
       
       {error && <p>Error: {error}</p>}

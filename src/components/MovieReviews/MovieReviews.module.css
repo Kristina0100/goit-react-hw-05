@@ -1,0 +1,16 @@
+.reviews {
+  border-top: 1px solid #0d253f;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.author {
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #0d253f;
+}
+
+.list {
+  list-style-type: circle;
+  margin-left: 35px;
+}

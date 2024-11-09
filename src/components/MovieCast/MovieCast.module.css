@@ -1,0 +1,26 @@
+.cast {
+  border-top: 1px solid #0d253f;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.photo {
+  margin-bottom: 15px;
+}
+
+.default {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.name {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
