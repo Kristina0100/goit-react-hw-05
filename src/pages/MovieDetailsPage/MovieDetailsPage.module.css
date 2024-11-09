@@ -49,18 +49,31 @@
   color: #0171c2;
 }
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: 2px solid #0d253f;
-  background-color: #0d253f;
-  color: white;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 30px;
+.linkwrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.btn:hover {
-  background-color: white;
+.link {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
   color: #0d253f;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #0171c2;
+}
+
+.arrow {
+  cursor: pointer;
+  flex-shrink: 0;
+  fill: #0d253f;
+  width: 18px;
+  height: 18px;
 }

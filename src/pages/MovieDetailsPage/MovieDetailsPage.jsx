@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation, Link, Outlet } from "react-router-dom";
 import {Suspense } from "react";
 import { getMovieById } from "../../api/movies";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 import styles from "./MovieDetailsPage.module.css"
 
@@ -34,7 +35,10 @@ export default function MovieDetailsPage() {
       {error && <p>Error: {error}</p>}
       {movie && (
         <div className={styles.page}>
-          
+          <div className={styles.linkwrap}>
+            <FaArrowLeftLong onClick={goBack}  className={styles.arrow} />
+            <a onClick={goBack} className={styles.link}>Go back</a>
+          </div>
           <div className={styles.imgwrap}>
             <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="Movie poster" />
             <div className={styles.wrap}>
@@ -61,7 +65,6 @@ export default function MovieDetailsPage() {
               <Outlet />
              </Suspense>
             </div>
-           <button type="button" onClick={goBack} className={styles.btn}>Go back</button>
           </div>
         </div>
       )}

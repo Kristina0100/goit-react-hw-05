@@ -30,7 +30,7 @@ export default function MovieReviews() {
           {reviews.map((review) => (
             <li key={review.id}>
               <p className={styles.author}>Author: {review.author}</p>
-              <p>«{review.content}»</p>
+              <p className={styles.review}>«{review.content}»</p>
             </li>
           ))}
         </ul>
